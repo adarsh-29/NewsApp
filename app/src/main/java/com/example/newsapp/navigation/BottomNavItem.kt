@@ -1,4 +1,4 @@
-package com.example.newsapp.feature_news.presentation.navigation
+package com.example.newsapp.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite

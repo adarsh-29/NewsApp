@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.newsapp.feature_news.presentation.common.*
-import com.example.newsapp.feature_news.presentation.navigation.Routes
+import com.example.newsapp.navigation.Routes
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 

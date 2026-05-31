@@ -1,10 +1,11 @@
-package com.example.newsapp.feature_news.presentation.navigation
+package com.example.newsapp.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.*
+import androidx.navigation.navDeepLink
 import com.example.newsapp.feature_news.presentation.bookmarks.BookmarksScreen
 import com.example.newsapp.feature_news.presentation.detail.DetailScreen
 import com.example.newsapp.feature_news.presentation.home.HomeScreen
@@ -99,7 +100,7 @@ fun NewsApp() {
             composable(
                 Routes.Detail.route,
                 deepLinks =
-                    listOf(androidx.navigation.navDeepLink {
+                    listOf(navDeepLink {
                         uriPattern = "newsapp://detail/{url}" }
                     )
             ) {

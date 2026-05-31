@@ -1,4 +1,4 @@
-package com.example.newsapp.feature_news.presentation.navigation
+package com.example.newsapp.navigation
 
 sealed class Routes(
     val route: String
