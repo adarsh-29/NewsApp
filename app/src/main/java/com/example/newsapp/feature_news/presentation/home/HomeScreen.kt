@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.material3.pulltorefresh.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
@@ -19,32 +20,24 @@ import java.nio.charset.StandardCharsets
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel =
-        hiltViewModel()
-) {
+    viewModel: HomeViewModel = hiltViewModel()) {
 
+    val pagingItems = viewModel.pagingFlow.collectAsLazyPagingItems()
 
-    val pagingItems = viewModel
-            .pagingFlow
-            .collectAsLazyPagingItems()
+    val refreshing = pagingItems.loadState.refresh is LoadState.Loading
 
-    val refreshing =
-        pagingItems.loadState.refresh is LoadState.Loading
-
-    val pullRefreshState =
-        rememberPullToRefreshState()
+    val pullRefreshState = rememberPullToRefreshState()
 
     Box(
         modifier =
-            Modifier.pullToRefresh(
-                state =
-                    pullRefreshState,
+            Modifier.fillMaxSize()
+                .padding(8.dp).
+                pullToRefresh(
+                state = pullRefreshState,
 
-                isRefreshing =
-                    refreshing,
+                isRefreshing = refreshing,
 
-                onRefresh = {
-                    pagingItems.refresh()
+                onRefresh = { pagingItems.refresh()
                 }
             )
     ) {

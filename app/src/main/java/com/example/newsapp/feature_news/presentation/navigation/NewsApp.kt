@@ -97,7 +97,11 @@ fun NewsApp() {
             }
 
             composable(
-                Routes.Detail.route
+                Routes.Detail.route,
+                deepLinks =
+                    listOf(androidx.navigation.navDeepLink {
+                        uriPattern = "newsapp://detail/{url}" }
+                    )
             ) {
                 DetailScreen(
                     navController =

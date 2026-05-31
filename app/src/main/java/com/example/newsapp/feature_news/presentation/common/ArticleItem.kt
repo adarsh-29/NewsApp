@@ -16,6 +16,7 @@ fun ArticleItem(
 
     Card(
         modifier = Modifier
+            .widthIn(max = 700.dp) // To support tablet
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
