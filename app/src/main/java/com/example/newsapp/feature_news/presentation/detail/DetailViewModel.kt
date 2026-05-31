@@ -8,15 +8,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 
 @HiltViewModel
 class DetailViewModel
 @Inject constructor(
-    savedStateHandle:
-    SavedStateHandle,
-
-    private val useCases:
-    NewsUseCases
+    savedStateHandle: SavedStateHandle,
+    private val useCases: NewsUseCases
 ) : ViewModel() {
 
     private val _uiState =
@@ -29,12 +28,19 @@ class DetailViewModel
 
     init {
 
-        val url =
+        val encoded =
             savedStateHandle
                 .get<String>("url")
 
-        if (url != null) {
-            load(url)
+        encoded?.let {
+
+            val decoded =
+                URLDecoder.decode(
+                    it,
+                    StandardCharsets.UTF_8.toString()
+                )
+
+            load(decoded)
         }
     }
 
@@ -54,13 +60,19 @@ class DetailViewModel
         }
     }
 
-    fun toggleBookmark(
-        url: String
-    ) {
+    fun toggleBookmark() {
+
+        val url =
+            _uiState.value
+                .article
+                ?.url
+                ?: return
 
         viewModelScope.launch {
 
             useCases.toggleBookmark(url)
+
+            load(url)
         }
     }
 }

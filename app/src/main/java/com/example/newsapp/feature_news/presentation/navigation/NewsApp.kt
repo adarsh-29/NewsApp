@@ -99,7 +99,10 @@ fun NewsApp() {
             composable(
                 Routes.Detail.route
             ) {
-                DetailScreen()
+                DetailScreen(
+                    navController =
+                        navController
+                )
             }
         }
     }
